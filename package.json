@@ -1,5 +1,5 @@
 {
-  "name": "automatizations-trello-power-up",
+  "name": "trello-count-time-power-up",
   "version": "0.0.1",
   "description": "A Power-Up skeleton to remix to start building your Power-Up!",
   "source": {
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint public",
-    "build": "parcel build views/index.html public/github_info_popup.html"
+    "build": "parcel build views/index.html"
   },
   "dependencies": {
     "express": "^4.15.2",
