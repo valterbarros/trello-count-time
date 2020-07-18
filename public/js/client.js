@@ -25,7 +25,8 @@ function fromMilisecondsToHoursAndMinutes(time) {
 
 var Promise = TrelloPowerUp.Promise;
 
-import './auth'
+import auth from './auth'
+auth()
 
 TrelloPowerUp.initialize({
   "card-badges": function(
