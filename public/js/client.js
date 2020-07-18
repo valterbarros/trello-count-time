@@ -71,7 +71,8 @@ TrelloPowerUp.initialize({
         return [
           {
             // icon: BLACK_ROCKET_ICON,
-            text: `${hours}`
+            text: `${hours}`,
+            refresh: 30
           }
         ];
       })
