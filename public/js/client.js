@@ -82,7 +82,7 @@ TrelloPowerUp.initialize({
       .then(hours => {
         return [
           {
-            icon: BLACK_ROCKET_ICON,
+            // icon: BLACK_ROCKET_ICON,
             text: `${hours}`
           }
         ];
