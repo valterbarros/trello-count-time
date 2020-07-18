@@ -32,56 +32,56 @@ TrelloPowerUp.initialize({
     t,
     options /* Returns some data from current card like id, etc*/
   ) {
-    // console.log(t)
-    return t
-      .card("dateLastActivity")
-      .get("dateLastActivity")
-      .then(lastActivity => {
-        return lastActivity;
-      })
-      .then(lastActivity => {
-        const getId = t.card("id").get("id");
-
-        return Promise.all([getId, lastActivity]);
-      })
-      .then(([cardId, lastActivity]) => {
-        const getActions = window.Trello.get(`/cards/${cardId}/actions`);
-        return Promise.all([getActions, lastActivity]);
-      })
-      .then(([actions, lastActivity]) => {
-        // console.log(actions.find((action) => action.type === 'updateCard' || action.type === 'createCard'))
-        const createOrUpdateCard = actions.find(action => {
-          return action.type === "updateCard" || action.type === "createCard";
-        });
-
-        if (createOrUpdateCard) {
-          // console.log(createOrUpdateCard)
-          return createOrUpdateCard.date;
-        } else {
-          return lastActivity;
-        }
-      })
-      .then(lastMoveListDate => {
-        // console.log(lastMoveListDate)
-        return fromMilisecondsToHoursAndMinutes(
-          Math.abs(new Date(lastMoveListDate) - new Date())
-        );
-      })
-      .then(hours => {
-        return [
-          {
-            dynamic: function() {
+    return [
+      {
+        dynamic: function() {
+          return t
+            .card("dateLastActivity")
+            .get("dateLastActivity")
+            .then(lastActivity => {
+              return lastActivity;
+            })
+            .then(lastActivity => {
+              const getId = t.card("id").get("id");
+      
+              return Promise.all([getId, lastActivity]);
+            })
+            .then(([cardId, lastActivity]) => {
+              const getActions = window.Trello.get(`/cards/${cardId}/actions`);
+              return Promise.all([getActions, lastActivity]);
+            })
+            .then(([actions, lastActivity]) => {
+              // console.log(actions.find((action) => action.type === 'updateCard' || action.type === 'createCard'))
+              const createOrUpdateCard = actions.find(action => {
+                return action.type === "updateCard" || action.type === "createCard";
+              });
+      
+              if (createOrUpdateCard) {
+                // console.log(createOrUpdateCard)
+                return createOrUpdateCard.date;
+              } else {
+                return lastActivity;
+              }
+            })
+            .then(lastMoveListDate => {
+              // console.log(lastMoveListDate)
+              return fromMilisecondsToHoursAndMinutes(
+                Math.abs(new Date(lastMoveListDate) - new Date())
+              );
+            })
+            .then(hours => {
               return {
                 // icon: BLACK_ROCKET_ICON,
                 text: `${hours}`,
                 refresh: 30
               }
-            }
-          }
-        ];
-      })
-      .catch(err => {
-        console.log(err);
-      });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      }
+    ]
+
   },
 });
