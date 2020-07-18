@@ -1,5 +1,4 @@
 /* global TrelloPowerUp */
-
 function fromMilisecondsToHoursAndMinutes(time) {
   const seconds = parseInt(time / 1000);
   const minutes = parseInt(seconds / 60);
@@ -34,9 +33,6 @@ TrelloPowerUp.initialize({
     options /* Returns some data from current card like id, etc*/
   ) {
     // console.log(t)
-    // console.log(options)
-    // let cardName = await t.card('id').get('id')
-    // console.log(cardName)
     return t
       .card("dateLastActivity")
       .get("dateLastActivity")
@@ -57,14 +53,6 @@ TrelloPowerUp.initialize({
         const createOrUpdateCard = actions.find(action => {
           return action.type === "updateCard" || action.type === "createCard";
         });
-
-        // actions.forEach((action) => {
-        //   console.log(action.data.card.name)
-        //   if(action.data.card.name === 'asds') {
-        //     console.log(action)
-        //   }
-        // })
-        // console.log(actions)
 
         if (createOrUpdateCard) {
           // console.log(createOrUpdateCard)
