@@ -29,8 +29,9 @@ auth()
 
 TrelloPowerUp.initialize({
   "card-badges": function(
-    t,
-    options /* Returns some data from current card like id, etc*/
+    t
+
+    /* options Returns some data from current card like id, etc */
   ) {
     return [
       {
@@ -43,7 +44,7 @@ TrelloPowerUp.initialize({
             })
             .then(lastActivity => {
               const getId = t.card("id").get("id");
-      
+
               return Promise.all([getId, lastActivity]);
             })
             .then(([cardId, lastActivity]) => {
@@ -55,7 +56,7 @@ TrelloPowerUp.initialize({
               const createOrUpdateCard = actions.find(action => {
                 return action.type === "updateCard" || action.type === "createCard";
               });
-      
+
               if (createOrUpdateCard) {
                 // console.log(createOrUpdateCard)
                 return createOrUpdateCard.date;
@@ -82,6 +83,5 @@ TrelloPowerUp.initialize({
         }
       }
     ]
-
-  },
+  }
 });
